@@ -1,0 +1,15 @@
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\bin\Debug\net8.0\MainPage.exe
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\bin\Debug\net8.0\MainPage.deps.json
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\bin\Debug\net8.0\MainPage.runtimeconfig.json
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\bin\Debug\net8.0\MainPage.dll
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\bin\Debug\net8.0\MainPage.pdb
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.GeneratedMSBuildEditorConfig.editorconfig
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.AssemblyInfoInputs.cache
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.AssemblyInfo.cs
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.csproj.CoreCompileInputs.cache
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.sourcelink.json
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.dll
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\refint\MainPage.dll
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.pdb
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\MainPage.genruntimeconfig.cache
+C:\projekty\Gra-w-Rybki\MainPage\MainPage\obj\Debug\net8.0\ref\MainPage.dll
