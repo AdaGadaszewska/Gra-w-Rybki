@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Rybki")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+960444124bcd7a76ee3164113b88804f29483b2d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be152955c2bcccf17c7d936f6c246bae24b756da")]
 [assembly: System.Reflection.AssemblyProductAttribute("Rybki")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Rybki")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
