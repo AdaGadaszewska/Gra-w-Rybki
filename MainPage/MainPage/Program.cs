@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 
 class Program
 {
@@ -14,7 +16,11 @@ class Program
             { "Troć wędrowna", 25 },
             { "Węgorz", 30 },
             { "Sandacz", 35 },
-            { "Wielki Karp", 50 }
+            { "Wielki Karp", 50 },
+            { "Orki z Majorki", 1000},
+            { "Delfin", 500 },
+            { "Megalodon", 700},
+            { "Rekin", 250 }
         };
 
         // Ekwipunek gracza (lista złowionych ryb)
@@ -29,6 +35,8 @@ class Program
         Console.WriteLine("Witaj w grze 'Łowienie Ryb'!");
         Console.WriteLine("Aby złowić rybę, wpisz 'łowienie'. Aby sprzedać ryby, wpisz 'sprzedaj'. Aby zakończyć grę, wpisz 'koniec'.");
 
+        string email = PromptForEmail();
+
         while (true)
         {
             Console.Write("Co chcesz zrobić? ");
@@ -36,22 +44,13 @@ class Program
 
             if (komenda == "łowienie")
             {
-                // Losowanie ryby z listy
                 string ryba = RandomRyba(ryby, random);
-
-                // Dodanie ryby do ekwipunku
                 ekwipunek.Add(ryba);
-
-                // Wyświetlenie komunikatu o złowieniu ryby
-                Console.WriteLine($"Złowiłeś/aś: {ryba}!");
-
-                // Dodanie punktów
                 punkty += ryby[ryba];
-                Console.WriteLine($"Zdobywasz {ryby[ryba]} punktów! Łącznie masz {punkty} punktów.");
+                Console.WriteLine($"Złowiłeś/aś: {ryba}! Zdobywasz {ryby[ryba]} punktów. Łącznie masz {punkty} punktów.");
             }
             else if (komenda == "sprzedaj")
             {
-                // Sprawdzanie, czy gracz ma jakieś ryby do sprzedaży
                 if (ekwipunek.Count > 0)
                 {
                     Console.WriteLine("Masz następujące ryby do sprzedaży:");
@@ -61,15 +60,10 @@ class Program
                     }
 
                     Console.Write("Wybierz numer ryby, którą chcesz sprzedać (lub 0, aby anulować): ");
-                    int numerRyby;
-                    bool validInput = int.TryParse(Console.ReadLine(), out numerRyby);
-
-                    if (validInput && numerRyby >= 1 && numerRyby <= ekwipunek.Count)
+                    if (int.TryParse(Console.ReadLine(), out int numerRyby) && numerRyby >= 1 && numerRyby <= ekwipunek.Count)
                     {
                         string sprzedanaRyba = ekwipunek[numerRyby - 1];
-                        ekwipunek.RemoveAt(numerRyby - 1); // Usuwanie sprzedanej ryby z ekwipunku
-
-                        // Dodanie punktów za sprzedaż
+                        ekwipunek.RemoveAt(numerRyby - 1);
                         punkty += ryby[sprzedanaRyba];
                         Console.WriteLine($"Sprzedałeś {sprzedanaRyba} za {ryby[sprzedanaRyba]} punktów! Łącznie masz {punkty} punktów.");
                     }
@@ -89,7 +83,6 @@ class Program
             }
             else if (komenda == "ekwipunek")
             {
-                // Wyświetlanie zawartości ekwipunku
                 Console.WriteLine("\nTwój ekwipunek:");
                 if (ekwipunek.Count > 0)
                 {
@@ -105,22 +98,52 @@ class Program
             }
             else if (komenda == "koniec")
             {
-                // Zakończenie gry
                 Console.WriteLine($"Dziękujemy za grę! Zdobyłeś/aś {punkty} punktów.");
+                SendEmail(email, punkty);
                 break;
             }
             else
             {
-                // Obsługa nieznanej komendy
                 Console.WriteLine("Nie rozumiem tej komendy. Spróbuj 'łowienie', 'sprzedaj', 'ekwipunek' lub 'koniec'.");
             }
         }
     }
 
-    // Funkcja losująca rybę z listy
     static string RandomRyba(Dictionary<string, int> ryby, Random random)
     {
         List<string> rybyList = new List<string>(ryby.Keys);
         return rybyList[random.Next(rybyList.Count)];
+    }
+
+    static string PromptForEmail()
+    {
+        Console.Write("Podaj swój adres e-mail, aby otrzymać wynik gry: ");
+        return Console.ReadLine();
+    }
+
+    static void SendEmail(string email, int punkty)
+    {
+        try
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("adixadixowska@gmail.com"); // Podaj tutaj swój adres e-mail
+            mail.To.Add(email);
+            mail.Subject = "Wynik gry 'Łowienie Ryb'";
+            mail.Body = $"Dziękujemy za grę! Zdobyłeś/aś {punkty} punktów. Ryby które zabierasz do domu: {ekwipunek}";
+
+            smtpServer.Port = 587;
+            smtpServer.Credentials = new NetworkCredential("adixadixowska@gmail.com", "vuas odqg thnu gpuj"); // Podaj swoje dane logowania
+            smtpServer.EnableSsl = true;
+
+            smtpServer.UseDefaultCredentials = false;
+            smtpServer.Send(mail);
+            Console.WriteLine("Wynik gry został wysłany na podany adres e-mail."); 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas wysyłania e-maila: {ex.Message}");
+        }
     }
 }
